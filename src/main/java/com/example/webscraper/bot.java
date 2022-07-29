@@ -23,7 +23,7 @@ public class bot {
         Document doc = Jsoup.connect("https://cha.house.gov/subcommittees/joint-committee-congress-library-116th-congress").get();
        Elements firstCol = doc.select("#region-content > div > div > div.center-wrapper > div.panel-col-last.panel-panel > div");
         for (Element headline : firstCol) {
-            Elements img = firstCol.select(".each-member");
+            Elements img = headline.select(".each-member");
             for (Element inner: img) {
                 Elements exmaple= inner.select("img");
                 String source = exmaple.attr("src");
