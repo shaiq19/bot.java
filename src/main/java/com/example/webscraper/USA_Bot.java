@@ -8,9 +8,10 @@ import org.jsoup.select.Elements;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class bot {
-    public Elements compute()  {
+public class USA_Bot {
+    public ArrayList<object> compute()  {
         try {
             return crawl();
         } catch (IOException e) {
@@ -19,7 +20,8 @@ public class bot {
 
         return null;
     }
-    public Elements crawl() throws IOException {
+    public ArrayList<object> crawl() throws IOException {
+        ArrayList<object> obj = new ArrayList();
         Document doc = Jsoup.connect("https://cha.house.gov/subcommittees/joint-committee-congress-library-116th-congress").get();
        Elements firstCol = doc.select("#region-content > div > div > div.center-wrapper > div.panel-col-last.panel-panel > div");
         for (Element headline : firstCol) {
@@ -34,12 +36,16 @@ public class bot {
                String[] SPLIT_STATE = desi.split("~");
                 String state = SPLIT_STATE[1];
                 /*System.out.println(state);*/
-                System.out.println(new object(source,title,state));
+
+               /* System.out.println(new object(source, title, state));*/
+               // System.out.println(obj.add(new object(source, title, state)));
+                obj.add(new object(source, title, state));
+
             }
 
         }
 
-       return null;
+       return obj;
     }
 
 }
