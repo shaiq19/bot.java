@@ -2,10 +2,7 @@ package com.example.webscraper.controller;
 
 import com.example.webscraper.USA_Bot;
 import humanModel.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -26,4 +23,15 @@ public class Controller {
         return m;
     }
 
+    @DeleteMapping("object/{id}")
+    public ArrayList<Model> deleteRecord(@PathVariable int id) {
+       return bot.deleterecord(id);
+    }
+
+    @PutMapping("/object/{id}")
+    public Model update(@RequestBody Model m, @PathVariable int id)
+    {
+        this.bot.update(m,id);
+        return m;
+    }
 }

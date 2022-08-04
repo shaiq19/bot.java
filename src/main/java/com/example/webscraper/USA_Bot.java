@@ -9,12 +9,19 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class USA_Bot {
     ArrayList<Model> obj = new ArrayList();
     public ArrayList<Model> compute()  {
         try {
-            return crawl();
+            if(obj.isEmpty()){
+                return crawl();
+            }
+            else {
+                return obj;
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -22,12 +29,13 @@ public class USA_Bot {
         return null;
     }
     public ArrayList<Model> crawl() throws IOException {
-
+        int i=0;
         Document doc = Jsoup.connect("https://cha.house.gov/subcommittees/joint-committee-congress-library-116th-congress").get();
        Elements firstCol = doc.select("#region-content > div > div > div.center-wrapper > div.panel-col-last.panel-panel > div");
         for (Element headline : firstCol) {
             Elements img = headline.select(".each-member");
             for (Element inner: img) {
+                i=i+1;
                 Elements exmaple= inner.select("img");
                 String source = exmaple.attr("src");
                 String title = exmaple.attr("title");
@@ -40,18 +48,37 @@ public class USA_Bot {
 
                /* System.out.println(new object(source, title, state));*/
                // System.out.println(obj.add(new object(source, title, state)));
-                obj.add(new Model(source, title, state));
+                obj.add(new Model(i,source, title, state));
 
             }
 
         }
+      /*  obj.clear();*/
 
-       return obj;
+        return obj;
     }
 
     public Model addrecords(Model m){
         obj.add(m);
         return  m;
+    }
+
+    public ArrayList<Model>  deleterecord(int m){
+        obj.remove(m);
+        return obj;
+
+    }
+
+    public void update(Model m, int id){
+        obj= (ArrayList<Model>) obj.stream().map(e->{
+            if(e.getId()==id){
+                e.setName(m.getName());
+                e.setImg(m.getImg());
+                e.setDes(m.getDes());
+            }
+           return e;
+        }).collect(Collectors.toList());
+       // return  m;
     }
 
 }

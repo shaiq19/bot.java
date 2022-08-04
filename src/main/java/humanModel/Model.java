@@ -1,20 +1,32 @@
 package humanModel;
 
-    public class Model {
+import java.time.Instant;
 
-        String name;
-        String img;
-        String des;
+public class Model {
 
-        public Model(String name, String img, String des) {
+    private  int id;
+    private String name;
+    private String img;
+    private String des;
+
+        public Model(int id, String img,String name, String des) {
+            this.id=id;
             this.name = name;
             this.img = img;
             this.des = des;
         }
 
-        public String getDes() {
-            return des;
+        public int getId() {
+            return id;
         }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getDes() {
+                return des;
+            }
 
         public void setDes(String des) {
             this.des = des;
@@ -38,6 +50,6 @@ package humanModel;
 
         @Override
          public String toString(){//overriding the toString() method
-            return getDes()+" "+getImg()+" "+getName();
+            return getId()+" "+getDes()+" "+getImg()+" "+getName();
         }
     }
