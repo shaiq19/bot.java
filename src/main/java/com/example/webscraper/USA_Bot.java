@@ -74,7 +74,6 @@ public class USA_Bot {
             if(e.getId()==id){
                 e.setName(m.getName());
                 e.setImg(m.getImg());
-                String name="@shaqaue";
                 e.setDes(m.getDes());
             }
            return e;
