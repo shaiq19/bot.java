@@ -1,6 +1,5 @@
 package com.example.webscraper.controller;
 
-import humanModel.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -34,6 +33,11 @@ public class ControllerRepo {
     public List<Customer> getAllCustomer(){
         String query = "SELECT * FROM customer";
         return jdbcTemplate.query(query, customerRowMapper);
+    }
+
+    public int insertData(Customer customer ){
+        String query = "INSERT INTO customer(id, name, cell) values(?,?,?)";
+        return this.jdbcTemplate.update(query, customer.getId(),customer.getName(),customer.getCell());
     }
 }
 

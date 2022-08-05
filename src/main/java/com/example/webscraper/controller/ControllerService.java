@@ -19,4 +19,8 @@ public class ControllerService {
     public List<Customer> getCustomers(){
         return controllerRepo.getAllCustomer();
     }
+
+    public int add(Customer customer){
+        return controllerRepo.insertData(customer);
+    }
 }

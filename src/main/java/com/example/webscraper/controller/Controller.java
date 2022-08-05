@@ -30,12 +30,20 @@ public class Controller {
         return ResponseEntity.status(200).body(controllerService.getCustomers());
     }
 
-    @PostMapping("/object/post")
+   /* @PostMapping("/object/post")
     public Model addRecord(@RequestBody Model m)
     {
         bot.addrecords(m);
         return m;
+    }*/
+
+
+    @PostMapping("/object/post")
+    public int addRecord(@RequestBody Customer customer )
+    {
+        return controllerService.add(customer);
     }
+
 
     @DeleteMapping("object/{id}")
     public ArrayList<Model> deleteRecord(@PathVariable int id) {
