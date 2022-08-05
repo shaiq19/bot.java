@@ -14,22 +14,25 @@ import java.util.List;
 public class ControllerRepo {
     private final JdbcTemplate jdbcTemplate;
 
-    RowMapper<Model> customerRowMapper = new RowMapper<Model>() {
+    RowMapper<Customer> customerRowMapper = new  RowMapper<Customer>() {
         @Override
-        public Model mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Model m = new Model();
-            m.setId(rs.getInt("id"));
-            m.setName("name");
-            m.setDes("designation");
-            return m;
+        public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Customer customer = new Customer();
+            customer.setId(rs.getInt("id"));
+            customer.setName(rs.getString("name"));
+            customer.setCell(rs.getDouble("cell"));
+            return customer;
         }
     };
 
 
     @Autowired
-    public ControllerRepo(JdbcTemplate jdbcTemplate){this.jdbcTemplate=jdbcTemplate;}
-    public List<Model> getAllCustomer(){
-        String query = "SELECT * m";
+    public ControllerRepo(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate=jdbcTemplate;
+    }
+
+    public List<Customer> getAllCustomer(){
+        String query = "SELECT * FROM customer";
         return jdbcTemplate.query(query, customerRowMapper);
     }
 }
