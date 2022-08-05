@@ -5,13 +5,18 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+
 public class USA_Bot {
+
     ArrayList<Model> obj = new ArrayList();
     public ArrayList<Model> compute()  {
         try {

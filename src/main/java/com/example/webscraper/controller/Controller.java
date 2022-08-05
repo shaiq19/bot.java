@@ -2,12 +2,16 @@ package com.example.webscraper.controller;
 
 import com.example.webscraper.USA_Bot;
 import humanModel.Model;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
 @RestController
 public class Controller {
+
+    @Autowired
+            public Controller(ControllerService controllerService){ this.controllerService= controllerService;}
     USA_Bot bot=new USA_Bot();
     @GetMapping("/object")
     public ArrayList<Model> myApi(){
