@@ -13,6 +13,7 @@ import java.util.List;
 public class Controller {
     @Autowired
     ControllerService controllerService;
+    ControllerRepo   controllerRepo;
 
     @Autowired
             public Controller(ControllerService controllerService){ this.controllerService= controllerService;}
@@ -37,18 +38,27 @@ public class Controller {
         return m;
     }*/
 
-
+/////
     @PostMapping("/object/post")
     public int addRecord(@RequestBody Customer customer )
     {
         return controllerService.add(customer);
     }
 
-
+/*
     @DeleteMapping("object/{id}")
     public ArrayList<Model> deleteRecord(@PathVariable int id) {
        return bot.deleterecord(id);
+    }*/
+
+
+    ///
+    @DeleteMapping("/object/{customerId}")
+    public void deleteRecord(@PathVariable ("customerId") int customerId)
+    {
+        this.controllerService.delete(customerId);
     }
+/*
 
     @PutMapping("/object/{id}")
     public Model update(@RequestBody Model m, @PathVariable int id)
@@ -56,4 +66,13 @@ public class Controller {
         this.bot.update(m,id);
         return m;
     }
+*/
+
+    @PutMapping("/object/{id}")
+    public int  update(@RequestBody Customer customer, @PathVariable int id)
+    {
+       return this.controllerService.update(customer, id);
+    }
+
+
 }

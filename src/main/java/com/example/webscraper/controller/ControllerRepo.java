@@ -31,13 +31,23 @@ public class ControllerRepo {
     }
 
     public List<Customer> getAllCustomer(){
-        String query = "SELECT * FROM customer";
+        String query = "SELECT * FROM customer order by id asc";
         return jdbcTemplate.query(query, customerRowMapper);
     }
 
     public int insertData(Customer customer ){
         String query = "INSERT INTO customer(id, name, cell) values(?,?,?)";
         return this.jdbcTemplate.update(query, customer.getId(),customer.getName(),customer.getCell());
+    }
+
+    public int deleteData(int id){
+        String query = "DELETE FROM customer WHERE id = ?";
+        return this.jdbcTemplate.update(query,id);
+    }
+
+    public int updateData(Customer customer, int customerId){
+        String query = "UPDATE customer SET name =?, cell=? WHERE id=?";
+        return this.jdbcTemplate.update(query, customer.getName(),customer.getCell(),customerId);
     }
 }
 

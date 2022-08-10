@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class ControllerService {
 
@@ -22,5 +23,13 @@ public class ControllerService {
 
     public int add(Customer customer){
         return controllerRepo.insertData(customer);
+    }
+///ERROR
+    public int delete(int eid){
+        return controllerRepo.deleteData(eid);
+    }
+
+    public int update(Customer customer,int customerId){
+       return controllerRepo.updateData(customer,customerId);
     }
 }
